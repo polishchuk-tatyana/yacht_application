@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+
+    <meta charset="UTF-8">
+    <title>Аренда яхт</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap-->
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Custom styles -->
+    <style>
+        html, body{
+            height: 100%;
+            max-height: 100%;
+        }
+
+        .cd{
+            color: white;
+            text-shadow: #fff -1px -1px 0,
+                 #333 1px 1px 0;
+            margin-right: 0.1%;
+
+        }
+        .general-container{
+            background: url(../static/yachts_images/37616475_l.jpg);
+            height: 100%;
+            background-size: cover;
+             background-size: 100%;
+            background-attachment: fixed;
+        }
+        .text{
+            color: azure;
+            font-family: 'Roboto', sans-serif;
+            text-shadow: #fff -1px -1px 0,
+                 #333 1px 1px 0;
+        }
+        .pink{
+            color: deeppink;
+            display: inline;
+        }
+ ul.hr {
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 4px; /* Значение полей */
+     margin-top: 5%;
+     color: black;
+
+   }
+   ul.hr li {
+    display: inline; /* Отображать как строчный элемент */
+    padding: 3px; /* Поля вокруг текста */
+
+   }
+
+    </style>
+</head>
+<body>
+<!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+              <ul class = "hr">
+                <li>
+                    <font size="3"><b>Submarine</b></font>
+                </li>
+            <li class="pink">
+                 <font size="3"><b>&</b></font>
+            </li>
+            <li>
+                 <font size="3"><b>Sea.</b></font>
+            </li>
+            </ul>
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">На главную</a></li>
+            <li><a href="/yachts">Аренда яхт</a></li>
+            <li><a href="#">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+
+            <li class="active"><a href="/login">Вход<span class="sr-only">(current)</span></a></li>
+            <li><a href="/registration_users">Регистрация</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="general-container">
+        <div class="container top-container">
+            <ul class = "hr">
+                <li>
+                    <font size="6"><b>Добро пожаловать на Submarine</b></font>
+                </li>
+
+            <li class="pink">
+                 <font size="6"><b>&</b></font>
+            </li>
+            <li>
+                 <font size="6"><b>Sea.</b></font>
+            </li>
+            </ul>
+            <div class="row">
+                <div class="col-lg-12 col-lg-offset">
+
+                    <h1 class="cd">Лучшее решение для аренды яхты вашей мечты.</h1></br>
+                    <h2 class="text">Доступные предложения по аренде частных яхт и других типов морских судов от
+                        владельцев по всему миру. Мы поможем Вам сделать наилучший выбор.</h2>
+
+                </div>
+            </div>
+        </div></br>
+    <form class="form-inline">
+            <center><input class="form-control mr-sm-2" type="search" placeholder="Турция, Хорватия, Греция..." aria-label="Search">
+
+       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Искать</button></center>
+
+    </form>
+    </div>
+
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

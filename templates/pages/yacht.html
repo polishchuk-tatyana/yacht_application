@@ -1,0 +1,175 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+
+    <meta charset="UTF-8">
+    <title>Аренда яхт</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap-->
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Custom styles -->
+    <style>
+        html, body{
+            height: 100%;
+            max-height: 100%;
+            background-color: whitesmoke;
+        }
+
+        .cd{
+            color: white;
+            text-shadow: #fff -1px -1px 0,
+                 #333 1px 1px 0;
+            margin-right: 0.1%;
+
+        }
+        .general-container{
+
+            height: 100%;
+            background-size: cover;
+        }
+        .text{
+            color: azure;
+            font-family: 'Roboto', sans-serif;
+            text-shadow: #fff -1px -1px 0,
+                 #333 1px 1px 0;
+        }
+        .pink{
+            color: deeppink;
+            display: inline;
+        }
+ ul.hr {
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 4px; /* Значение полей */
+     margin-top: 5%;
+     color: black;
+
+   }
+   ul.hr li {
+    display: inline; /* Отображать как строчный элемент */
+    padding: 3px; /* Поля вокруг текста */
+
+   }
+    .yacht-item{
+
+        height: 350px;
+        background-color: white;
+        position: relative;
+        border: 1px solid lightgray;
+        padding: 5px;
+        text-align: center;
+    }
+    .section{
+        margin: 20px;
+    }
+    .bron{
+        bottom: 5px;
+        left: 70px;
+        color: black;
+    }
+
+
+    </style>
+</head>
+<body>
+
+<!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <a class="navbar-brand" href="#"><font color="#ff1493">Аренда яхт</font>
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">На главную</a></li>
+            <li><a href="/yachts">Аренда яхт</a></li>
+            <li><a href="#">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="/login">Вход<span class="sr-only">(current)</span></a></li>
+            <li><a href="/registration_users">Регистрация</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    {%  if yacht.id == yacht_one%}
+                     <img src = "../../static/media/yacht_images/0.jpg" class="img-responsive">
+                    {% endif %}
+                {%  if yacht.id == yacht_two%}
+                     <img src = "../../static/media/yacht_images/1.jpeg" class="img-responsive">
+                    {% endif %}
+                {%  if yacht.id == yacht_four%}
+                     <img src = "../../static/media/yacht_images/2.jpg" class="img-responsive">
+                    {% endif %}
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="text-center">
+                    </h1>
+                    <div>
+                     <h1><b>Характеристики</b></h1></br>
+                     <p><font size="4" face="Arial">
+                        Производитель: <b>{{ yacht.manufacturer.name }}</b>
+                     </font></p>
+                         <p><font size="4" face="Arial">
+                        Модель: <b>{{ yacht.model }}</b>
+                     </font></p>
+                     <p><font size="4" face="Arial">
+                        Двигатель: <b>{{ yacht.motor }}</b>
+                     </font></p>
+                     <p><font size="4" face="Arial">
+                        Год: <b>{{ yacht.year }}</b>
+                     </font></p>
+                        <p><font size="4" face="Arial">
+                        Длина: <b>{{ yacht.length }}</b>
+                     </font></p>
+                        <p><font size="4" face="Arial">
+                        Вместительность: <b>{{ yacht.max_human }} людей</b>
+                     </font></p>
+                    </div>
+
+                    <div class="bron">
+                        <button id ="bron" type = "submit" class="btn btn-success">Забронировать</button>
+                        <button id ="izbr" type = "submit" class="btn btn-success"
+                         data-yacht_id="{{ yacht.id }}"
+                        data-yacht_model = "{{ yacht.model }}"
+                        data-yacht_paid = "{{ yacht.paid }}">
+                                Добавить в избранное</button>
+
+                        </div>
+                </div>
+            </div>
+        </div></br>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript"  src="{% static "scripts/scripts.js" %}"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</body>
+</html>

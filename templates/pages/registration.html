@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap-->
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+    <!-- Custom styles -->
+    <style>
+        .cd{
+    color: whitesmoke;
+    text-align: center;
+            }
+        html, body{
+            background-color: aqua;
+            height: 100%;
+            max-height: 100%;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 100;
+        }
+        .top-container{
+            padding-top: 25%;
+        }
+        .general-container{
+            background: url(../../static/yachts_images/kak-kupit-parusnuyu-yakhtu-1.jpg);
+            background-size: cover;
+            height: 60%;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+
+      .general-container form label{
+            color: darkblue;
+            font-weight: 100;
+      }
+        .btn-orange{
+            background-color: royalblue;
+            border: none;
+        }
+        .btn-orange:hover{
+            background-color: blue;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+ <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <a class="navbar-brand" href="#"><font color="#ff1493">Регистрация</font>
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">На главную</a></li>
+            <li><a href="/yachts">Аренда яхт</a></li>
+            <li><a href="#">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="/login">Вход<span class="sr-only">(current)</span></a></li>
+            <li><a href="/registration_users">Регистрация</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<div class="general-container">
+    <h1 class="cd">Добро пожаловать на Submarine&Sea.</h1>
+    <h3 class="cd">Зарегестрируйтесь для входа на сайт.
+                      Будучи аторизованным пользователем у вас появится возможность добавить
+                        понравившиеся яхты в избранное и
+                        зарегестрировать свое собственное судно</h3>
+    <div class="container top-container">
+
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset">
+                <p><h1>Зарегистрироваться</h1></p>
+
+            <form action="" method="post" class="form-inline text-center">{% csrf_token %}
+                 <div class="form-group">
+                     <label class="control-label col-sm-5">Имя</label></br>
+                     <div class="col-sm-9">
+                          <input type="text" name = "{{ form.firstname.name }}" class="form-control">
+                     </div>
+
+                 </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Фамилия</label></br>
+                    <div class="col-sm-9">
+                         <input type="text" name = "{{ form.surname.name }}" class="form-control">
+                    </div>
+
+                 </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Возраст</label></br>
+                    <div class="col-sm-9">
+                    <input type="text" name = "{{ form.age.name }}" class="form-control">
+                    </div>
+
+                 </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-6">Телефон</label></br>
+                    <div class="col-sm-9">
+                       <input type="text" name = "{{ form.telno.name }}" class="form-control">
+                    </div>
+
+                 </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-5">Email</label></br>
+                    <div class="col-sm-9">
+                        <input type="email" name = "{{ form.email.name }}" class="form-control">
+                    </div>
+
+                 </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-5">Логин</label></br>
+                    <div class="col-sm-9">
+                       <input type="text" name = "{{ form.login.name }}" class="form-control">
+                    </div>
+
+                 </div>
+                <div class="form-group">
+                     <label class="control-label col-sm-5">Пароль</label></br>
+                    <div class="col-sm-9">
+                    <input type="text" name = "{{ form.password.name }}" class="form-control">
+                    </div>
+                 </div>
+                <p>Нажимая на "Зарегистрировать", Вы принимаете Условия пользовательского соглашения.</p></br>
+                <button type="submit" class="btn btn-primary btn-orange">Зарегистрировать</button></br></br>
+                </form>
+            </div>
+            </div></br>
+
+
+        </div></br>
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
