@@ -21,3 +21,15 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = Users
         exclude = [""]
+
+
+class RegistrationYacht(forms.ModelForm):
+    class Meta:
+        model = Yacht
+        exclude = [""]
+
+
+class RegistrationOwner(forms.ModelForm):
+    class Meta:
+        model = Owner
+        exclude = [""]

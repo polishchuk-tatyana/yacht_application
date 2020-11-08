@@ -15,6 +15,7 @@
             height: 100%;
             max-height: 100%;
             background-color: whitesmoke;
+            margin-left: 1%;
         }
 
         .cd{
@@ -68,7 +69,9 @@
         left: 70px;
         color: black;
     }
-
+    .posit{
+        margin-left: 60%;
+    }
     </style>
 </head>
 <body>
@@ -111,6 +114,7 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+<form action="" method="post">
 <div>
     <h3>
         <p class="font-weight-light">Личная информация</p>
@@ -120,29 +124,29 @@
   <div class="form-row">
     <div class="form-group col-md-5">
       <label for="inputEmail4">ИМЯ</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <input type="text" class="form-control" id="inputEmail4" name = "{{ form.firstname.name }}">
     </div>
     <div class="form-group col-md-5">
       <label for="inputPassword4">ФАМИЛИЯ</label>
-      <input type="password" class="form-control" id="inputPassword4">
+      <input type="text" class="form-control" id="inputPassword4">
     </div>
   </div>
 
      <div class="form-row">
     <div class="form-group col-md-5">
       <label for="inputEmail4">ТЕЛЕФОН</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <input type="text" class="form-control" id="inputEmail4">
     </div>
     <div class="form-group col-md-5">
       <label for="inputPassword4">EMAIL</label>
-      <input type="password" class="form-control" id="inputPassword4">
+      <input type="email" class="form-control" id="inputPassword4">
     </div>
   </div>
 
      <div class="form-row">
     <div class="form-group col-md-5">
       <label for="inputEmail4">ПАРОЛЬ</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <input type="password" class="form-control" id="inputEmail4">
     </div>
     <div class="form-group col-md-5">
       <label for="inputPassword4">ПОВТОРИТЕ ПАРОЛЬ</label>
@@ -158,44 +162,92 @@
 </div>
  <form>
   <div class="form-row">
+        ТИП
      <div class="form-group row">
-    <div class="col-sm-10">
-      <div class="form-check">
+    <div class="col-sm-10 ">
+      <div class="form-check ">
         <input class="form-check-input" type="checkbox" id="gridCheck1">
         <label class="form-check-label" for="gridCheck1">
-
+                моторная яхта
+        </label>
+          <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+                парусная яхта
+        </label>
+          <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+                катамаран
+        </label>
+          <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+               надувная моторная лодка
+        </label>
+          <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+                 яхта люкс
+        </label>
+          <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+                плавучий дом
+        </label>
+          <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+              гидроцикл
         </label>
       </div>
     </div>
   </div>
     <div class="form-group col-md-5">
-      <label for="inputPassword4">ФАМИЛИЯ</label>
-      <input type="password" class="form-control" id="inputPassword4">
+      <label for="inputPassword4">ГАВАНЬ</label>
+      <input type="text" class="form-control" id="inputPassword4">
     </div>
   </div>
 
      <div class="form-row">
     <div class="form-group col-md-5">
-      <label for="inputEmail4">ТЕЛЕФОН</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <label for="inputEmail4">МОДЕЛЬ</label>
+      <input type="text" class="form-control" id="inputEmail4">
     </div>
     <div class="form-group col-md-5">
-      <label for="inputPassword4">EMAIL</label>
-      <input type="password" class="form-control" id="inputPassword4">
+      <label for="inputPassword4">ВМЕСТИМОСТЬ</label>
+      <input type="text" class="form-control" id="inputPassword4">
     </div>
   </div>
 
      <div class="form-row">
     <div class="form-group col-md-5">
-      <label for="inputEmail4">ПАРОЛЬ</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <label for="inputEmail4">КОЛИЧЕСТВО КАЮТ</label>
+      <input type="text" class="form-control" id="inputEmail4">
     </div>
     <div class="form-group col-md-5">
-      <label for="inputPassword4">ПОВТОРИТЕ ПАРОЛЬ</label>
-      <input type="password" class="form-control" id="inputPassword4">
+      <label for="inputPassword4"> ГОД ВЫПУСКА</label>
+      <input type="text" class="form-control" id="inputPassword4">
     </div>
   </div>
- </form>
+     <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="inputEmail4">ПРОИЗВОДИТЕЛЬ</label>
+      <input type="text" class="form-control" id="inputEmail4">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="inputPassword4">СТОИМОСТЬ</label>
+      <input type="text" class="form-control" id="inputPassword4">
+    </div>
+  </div>
+
+     <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="inputEmail4">ДЛИНА</label>
+      <input type="text" class="form-control" id="inputEmail4">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="inputPassword4">МОТОР</label>
+      <input type="text" class="form-control" id="inputPassword4">
+    </div>
+  </div>
+ </form><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <button type="text" class="btn btn-primary btn-orange posit">СОХРАНИТЬ</button></br></br>
+</form>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
