@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import RegistrationForm, LoginForm
 from .models import *
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -16,11 +17,6 @@ def registration(request):
 def home(request):
 
     return render(request, 'pages/home.html', locals())
-
-
-def favorites(request):
-
-    return render(request, 'pages/favorites.html', locals())
 
 
 def registration_yacht(request):
@@ -43,6 +39,12 @@ def yacht(request, yacht_id):
     yacht_two = 2
     yacht_four = 4
     yacht = Yacht.objects.get(id=yacht_id)
+
+    session_key = request.session.session_key
+    if not session_key:
+        request.session.cycle_key()
+    print(request.session.session_key)
+
     return render(request, 'pages/yacht.html', locals())
 
 

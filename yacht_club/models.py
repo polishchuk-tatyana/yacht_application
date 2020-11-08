@@ -8,6 +8,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 
+
 class Club(models.Model):
     name = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
@@ -20,6 +21,18 @@ class Club(models.Model):
     class Meta:
         managed = False
         db_table = 'club'
+
+
+class DataYacht(models.Model):
+    session_key = models.CharField(max_length=128, blank=True, null=True)
+    type = models.TextField()  # This field type is a guess.
+    model = models.CharField(max_length=100)
+    max_human = models.IntegerField()
+    paid = models.TextField()  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'data_yacht'
 
 
 class Lease(models.Model):
@@ -59,6 +72,18 @@ class Manufacturer(models.Model):
     class Meta:
         managed = False
         db_table = 'manufacturer'
+
+
+class Owner(models.Model):
+    surname = models.CharField(max_length=50)
+    firstname = models.CharField(max_length=50)
+    telno = models.CharField(max_length=15)
+    email = models.CharField(max_length=50, blank=True, null=True)
+    password = models.CharField(max_length=8)
+
+    class Meta:
+        managed = False
+        db_table = 'owner'
 
 
 class Service(models.Model):
@@ -127,11 +152,10 @@ class Yacht(models.Model):
     year = models.IntegerField()
     length = models.CharField(max_length=10, blank=True, null=True)
     motor = models.CharField(max_length=10, blank=True, null=True)
-    users = models.ForeignKey(Users, models.DO_NOTHING, db_column='users')
     club = models.ForeignKey(Club, models.DO_NOTHING, db_column='club')
     manufacturer = models.ForeignKey(Manufacturer, models.DO_NOTHING, db_column='manufacturer')
     paid = models.TextField()  # This field type is a guess.
-
+    owner = models.ForeignKey(Owner, models.DO_NOTHING, db_column='owner')
 
     class Meta:
         managed = False

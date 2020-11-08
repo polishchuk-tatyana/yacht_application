@@ -10,7 +10,7 @@ urlpatterns = [
     path('yachts/', views.yachts, name='yachts'),
     path('yacht/(?P<yacht_id>\w+)/$', views.yacht, name='yacht'),
     path('login/', views.login, name='login'),
-    path('favorites/', views.favorites, name='favorites'),
     path('reservation/', views.reservation, name='reservation'),
     path('registration_yacht/', views.registration_yacht, name='registration_yacht'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

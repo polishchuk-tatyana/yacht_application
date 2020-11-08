@@ -1,13 +1,38 @@
 $(document).ready(function(){
-   var izbr = $('#izbr');
-   console.log(izbr);
-   izbr.on('click', function (e){
+   var bron = $('#bron');
+   console.log(bron);
+   bron.on('submit', function (e){
       e.preventDefault();
-      var yacht_id = izbr.data("yacht_id");
-      var yacht_model = izbr.data("yacht_model");
-      var yacht_paid = izbr.data("yacht_paid");
-      var yacht_image = izbr.data("")
+      var submit_b = $('#submit_b');
+      var yacht_id = submit_b.data("yacht_id");
+      var yacht_model = submit_b.data("yacht_model");
+      var yacht_paid = submit_b.data("yacht_paid");
       console.log(yacht_id, yacht_model,yacht_paid);
+
+      var data = {};
+      data.yacht_id = yacht_id;
+      data.yacht_model = yacht_model;
+      data.yacht_paid = yacht_paid;
+      console.log(data);
+
+      /*var csrf_token = $('#izbr [name = "csrfmiddlewaretoken"]').val();
+      data["csrfmiddlewaretoken"] = csrf_token;
+      var url = izbr.attr("action");
+
+      $.ajax({
+         url: url,
+         type:'POST',
+         data: data,
+         cache: true,
+         success: function (data){
+            console.log("OK");
+            console.log(data.new_yacht);
+         },
+         error: function (){
+            console.log("error");
+         }
+
+      })*/
    })
 
 });
