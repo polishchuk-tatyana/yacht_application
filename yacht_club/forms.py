@@ -24,12 +24,20 @@ class LoginForm(forms.ModelForm):
 
 
 class RegistrationYacht(forms.ModelForm):
+
     class Meta:
-        model = Yacht
+        model = Owner
         exclude = [""]
 
 
-class RegistrationOwner(forms.ModelForm):
+YachtFormset = forms.inlineformset_factory(Owner, Yacht,
+fields=("type", "model", 'max_human', 'cabin', 'year', 'length', 'motor', 'club', 'manufacturer', 'paid', 'owner'),
+exclude=[""], extra=1, can_delete=False, )
+
+
+class ReservationYacht(forms.ModelForm):
+    pay_method = forms.ChoiceField(label='Способ оплаты')
+
     class Meta:
-        model = Owner
+        model = Lease
         exclude = [""]

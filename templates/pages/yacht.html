@@ -147,15 +147,16 @@
                         Длина: <b>{{ yacht.length }}</b>
                      </font></p>
                         <p><font size="4" face="Arial">
-                        Вместительность: <b>{{ yacht.max_human }} людей</b>
+                        Вместительность: <b>{{ yacht.max_human}} людей</b>
                      </font></p>
                     </div>
                     <div class="bron" >
-            <form id ="bron" class="col-lg-3">{% csrf_token %}
-                <button type = "submit" class="btn btn-success" id = "submit_b"
+            <form id ="bron" class="col-lg-3" action="{% url 'reservation' %}">{% csrf_token %}
+    <button type = "submit" class="btn btn-success design" id = "submit_b"
                 data-yacht_id="{{ yacht.id }}"
                         data-yacht_model = "{{ yacht.model }}"
                         data-yacht_paid = "{{ yacht.paid }}"
+
                 >Забронировать</button>
             </form>
 

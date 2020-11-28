@@ -15,8 +15,8 @@ class Club(models.Model):
     address = models.TextField(blank=True, null=True)  # This field type is a guess.
     telno = models.CharField(max_length=15)
 
-    '''def __str__(self):
-        return "%s %s" % (self.id, self.country)'''
+    def __str__(self):
+        return "%s %s" % (self.name, self.country)
 
     class Meta:
         managed = False
@@ -25,9 +25,7 @@ class Club(models.Model):
 
 class DataYacht(models.Model):
     session_key = models.CharField(max_length=128, blank=True, null=True)
-    type = models.TextField()  # This field type is a guess.
     model = models.CharField(max_length=100)
-    max_human = models.IntegerField()
     paid = models.TextField()  # This field type is a guess.
 
     class Meta:
@@ -73,6 +71,8 @@ class Manufacturer(models.Model):
         managed = False
         db_table = 'manufacturer'
 
+    def __str__(self):
+        return "%s %s" % (self.name, self.country)
 
 class Owner(models.Model):
     surname = models.CharField(max_length=50)
@@ -120,8 +120,8 @@ class Users(models.Model):
     login = models.CharField(max_length=100)
     password = models.CharField(max_length=8)
 
-    '''def __str__(self):
-        return self.id'''
+    def __str__(self):
+        return "%s %s" % (self.surname, self.firstname)
 
     class Meta:
         managed = False
@@ -156,10 +156,11 @@ class Yacht(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, models.DO_NOTHING, db_column='manufacturer')
     paid = models.TextField()  # This field type is a guess.
     owner = models.ForeignKey(Owner, models.DO_NOTHING, db_column='owner')
-
     class Meta:
         managed = False
         db_table = 'yacht'
+    def __str__(self):
+        return self.model
 
 
 class Yachtworkers(models.Model):

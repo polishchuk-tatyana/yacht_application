@@ -12,5 +12,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('reservation/', views.reservation, name='reservation'),
     path('registration_yacht/', views.registration_yacht, name='registration_yacht'),
-
+    # path('registration_yacht_yacht/', views.registration_yacht_yacht, name="registration_yacht_yacht")
+    path('reservation_yacht/', views.reservation_yacht, name='reservation_yacht'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -15,9 +15,9 @@ $(document).ready(function(){
       data.yacht_paid = yacht_paid;
       console.log(data);
 
-      /*var csrf_token = $('#izbr [name = "csrfmiddlewaretoken"]').val();
+      var csrf_token = $('#bron [name = "csrfmiddlewaretoken"]').val();
       data["csrfmiddlewaretoken"] = csrf_token;
-      var url = izbr.attr("action");
+      var url = bron.attr("action");
 
       $.ajax({
          url: url,
@@ -26,13 +26,13 @@ $(document).ready(function(){
          cache: true,
          success: function (data){
             console.log("OK");
-            console.log(data.new_yacht);
+              console.log(data.new_yacht);
          },
          error: function (){
             console.log("error");
          }
 
-      })*/
+      })
    })
 
 });
