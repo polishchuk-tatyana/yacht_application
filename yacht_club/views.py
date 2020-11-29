@@ -4,6 +4,7 @@ from django.template import RequestContext, loader
 from .forms import *
 from .models import *
 from django.shortcuts import redirect
+from django.core import serializers
 from django.http import JsonResponse
 # Create your views here.
 
@@ -40,10 +41,12 @@ def reservation(request):
     yacht_model = data.get('yacht_model')
     yacht_paid = data.get('yacht_paid')
     new_yacht = DataYacht.objects.create(session_key=session_key,id=yacht_id, model=yacht_model, paid=yacht_paid)
-    # return_dict['new_yacht'] = new_yacht
-
-    return JsonResponse({'new_yacht': new_yacht})
+    nmb = DataYacht.objects.filter(session_key=session_key).count()
+    return_dict['nmb'] = nmb
+    # reserv = serializers.serialize('json', new_yacht)
+    return JsonResponse(return_dict)
     # return render(return_dict, 'pages/reservation.html', locals())
+    # return HttpResponse(reserv, content_type='application/json')
 
 
 def yachts(request):

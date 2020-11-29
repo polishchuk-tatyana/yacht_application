@@ -26,7 +26,7 @@ $(document).ready(function(){
          cache: true,
          success: function (data){
             console.log("OK");
-              console.log(data.new_yacht);
+              console.log(data.nmb);
          },
          error: function (){
             console.log("error");
