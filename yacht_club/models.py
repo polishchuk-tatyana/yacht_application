@@ -27,6 +27,8 @@ class DataYacht(models.Model):
     session_key = models.CharField(max_length=128, blank=True, null=True)
     model = models.CharField(max_length=100)
     paid = models.TextField()  # This field type is a guess.
+    max_human = models.IntegerField()
+    type = models.TextField()
 
     class Meta:
         managed = False

@@ -10,8 +10,9 @@ urlpatterns = [
     path('yachts/', views.yachts, name='yachts'),
     path('yacht/(?P<yacht_id>\w+)/$', views.yacht, name='yacht'),
     path('login/', views.login, name='login'),
-    path('reservation/', views.reservation, name='reservation'),
+    path('reservation/', views.reserv_yacht, name='reserv_yacht'),
+    # замена на другой адрес
+    path('registration_yacht_yacht/', views.reservation, name='reservation'),
     path('registration_yacht/', views.registration_yacht, name='registration_yacht'),
     # path('registration_yacht_yacht/', views.registration_yacht_yacht, name="registration_yacht_yacht")
-    path('reservation_yacht/', views.reservation_yacht, name='reservation_yacht'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

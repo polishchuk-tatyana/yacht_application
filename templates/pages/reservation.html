@@ -15,6 +15,8 @@
             height: 100%;
             max-height: 100%;
             background-color: whitesmoke;
+            background: url(../static/yachts_images/fon.jpg);
+            background-size: cover;
         }
 
         .cd{
@@ -23,11 +25,6 @@
                  #333 1px 1px 0;
             margin-right: 0.1%;
 
-        }
-        .general-container{
-            background: url(../static/yachts_images/37616475_l.jpg);
-            height: 100%;
-            background-size: cover;
         }
         .text{
             color: azure;
@@ -68,7 +65,9 @@
         left: 70px;
         color: black;
     }
-
+    .left{
+        margin-left: 5%;
+    }
     </style>
 </head>
 <body>
@@ -112,7 +111,61 @@
     </nav>
 
 
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Все ваши бронирования</h3>
+<form method="POST"> {% csrf_token %}
+     {% for bron in bron_yachts %}
+        <h4 class="left" >{{ bron.type }}</h4>
+        <h5 class="left" style="font-weight:bold">Модель:   {{ bron.model }}. {{ bron.paid }} в день</h5>
+         <h6 class="left">Вместимость: {{ bron.max_human }} людей.</h6>
+         <p>_____________________________________</p>
 
+<div class="left">
+    <p><label for="id_yacht">Яхта:</label> <select name="yacht" required id="id_yacht">
+  <option value="">Ваши яхты</option>
+
+  <option value="{{ bron.id }}">{{ bron.model }}</option>
+
+
+</select></p>
+<p><label for="id_users">Кто бронирует:</label> <select name="users" required id="id_users">
+  <option value="">---------</option>
+
+  <option value="1">Давидов Александр</option>
+
+  <option value="2">Гайдар Денис</option>
+
+  <option value="4">Пивоваров Сергей</option>
+
+  <option value="6">Немедова Наталья</option>
+
+  <option value="7" selected>etg Светлана</option>
+
+</select></p>
+    <p>Впишите из предложенных способ оплаты</p>
+    <p>-bank   -card   -cash</p>
+<p><label for="id_pay_method">Оплата:</label> <input name="pay_method" required id="id_pay_method"></input></p>
+<p>Впишите желаемые даты</p>
+    <p><label for="id_rent_start">С </label> <input type="date" min="2018-12-31" id="theDate" max="2028-12-31" name="rent_start" required id="id_rent_start"></p>
+<p><label for="id_rent_finish">По</label> <input type="date" name="rent_finish" required id="id_rent_finish"></p>
+<p><label for="id_capitan">С капитаном или без?</label> <input type="checkbox" name="capitan" id="id_capitan" checked></p>
+<p><label for="id_certification">Имеются права на вождение судном</label> <select name="certification" id="id_certification">
+  <option value="true">да</option>
+
+  <option value="false" selected>нет</option>
+
+</select></p>
+
+</div>
+    <button class="btn btn-primary btn-orange posit btn-lg left" type="submit">Сохранить</button>
+    {% endfor %}
+</form>
+        </div>
+    </div>
+
+</div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -120,5 +173,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <script src="../../static/scripts/scripts.js"></script>
+<script src="../../static/scripts/date.js"></script>
 </body>
 </html>

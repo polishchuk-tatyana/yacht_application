@@ -114,7 +114,7 @@
       </div>
     </nav>
 <div>
-    <tr>
+    <br>
         <form method="POST">
             {% csrf_token %}
             <div>
@@ -155,12 +155,39 @@
         <p class="font-weight-light">Ваша яхта</p>
     </h3>
 </div>
+{% for i in yacht_formset %}
             <div>
-                {{ yacht_formset.as_p}}
+<input type="hidden" name="yacht_set-TOTAL_FORMS" value="1" id="id_yacht_set-TOTAL_FORMS"><input type="hidden" name="yacht_set-INITIAL_FORMS" value="0" id="id_yacht_set-INITIAL_FORMS"><input type="hidden" name="yacht_set-MIN_NUM_FORMS" value="0" id="id_yacht_set-MIN_NUM_FORMS"><input type="hidden" name="yacht_set-MAX_NUM_FORMS" value="1000" id="id_yacht_set-MAX_NUM_FORMS">
+<p>Впишите тип вашей яхты</p>
+    <p>-моторная яхта, -парусная яхта, -катамаран, -надувная моторная лодка, -яхта люкс, -плавучий дом, -гидроцикл</p>
+<p><label for="id_yacht_set-0-type">Тип яхты:</label> <input name="yacht_set-0-type" id="id_yacht_set-0-type">
+</input></p>
+<p><label for="id_yacht_set-0-model">Модель:</label> <input type="text" name="yacht_set-0-model" maxlength="100" id="id_yacht_set-0-model"></p>
+<p><label for="id_yacht_set-0-max_human">Вместимость:</label> <input type="number" name="yacht_set-0-max_human" id="id_yacht_set-0-max_human"></p>
+<p><label for="id_yacht_set-0-cabin">Количество кают:</label> <input type="number" name="yacht_set-0-cabin" id="id_yacht_set-0-cabin"></p>
+<p><label for="id_yacht_set-0-year">Год выпуска:</label> <input type="number" name="yacht_set-0-year" id="id_yacht_set-0-year"></p>
+<p><label for="id_yacht_set-0-length">Длина:</label> <input type="text" name="yacht_set-0-length" maxlength="10" id="id_yacht_set-0-length"></p>
+<p><label for="id_yacht_set-0-motor">Двигатель:</label> <input type="text" name="yacht_set-0-motor" maxlength="10" id="id_yacht_set-0-motor"></p>
+<p><label for="id_yacht_set-0-club">Выберите с какого клуба вы регистрируете свою яхту:</label> <select name="yacht_set-0-club" id="id_yacht_set-0-club">
+  <option value="" selected>Яхт клуб</option>
+
+    <option value="{{ i.club }}"></option>
+
+</select></p>
+<p><label for="id_yacht_set-0-manufacturer">Выберите производителя:</label> <select name="yacht_set-0-manufacturer" id="id_yacht_set-0-manufacturer">
+  <option value="" selected>Производитель</option>
+
+  <option value="{{ i.manufacturer }}"> </option>
+
+</select></p>
+<p><label for="id_yacht_set-0-paid">Цена за сутки:</label> <input name="yacht_set-0-paid" id="id_yacht_set-0-paid">
+</input><input type="hidden" name="yacht_set-0-owner" id="id_yacht_set-0-owner"><input type="hidden" name="yacht_set-0-id" id="id_yacht_set-0-id"></p>
+
      </div></br></br>
+{% endfor %}
             <input class="btn btn-primary btn-orange posit" type="submit" value="СОХРАНИТЬ">
         </form>
-    </tr>
+    </br>
 </div>
 
     <!-- jQuery -->
