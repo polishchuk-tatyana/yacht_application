@@ -1,38 +1,89 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import RequestContext, loader
-from .forms import *
-from .models import *
-from django.shortcuts import redirect
-from django.core import serializers
-from django.http import JsonResponse
-# Create your views here.
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponseRedirect,JsonResponse
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.models import User
 from django.contrib.messages import error as ms_error
-from django.views.generic.list import ListView
 import datetime
 from django.db import connection
 from .forms import *
 from .models import *
 from datetime import datetime, date
+from django.contrib.auth.models import User
+
+
+def admin_page(request):
+    return render(request, 'pages/admin_page.html', locals())
 
 
 def registration(request):
     form = RegistrationForm(request.POST or None)
-
-    if request.method == "POST" and form.is_valid():
+    if request.method == 'POST' and form.is_valid():
         data = form.cleaned_data
         new_form = form.save()
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            return render(request, 'pages/home_for_user.html', locals())
+    else:
+        user_form = UserRegistrationForm()
     return render(request, 'pages/registration.html', locals())
 
 
-def home(request):
+'''def registration(request):
+    form = RegistrationForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        firstname = request.POST.get('first_name')
+        surname = request.POST.get('last_name')
+        password = request.POST.get('password')
+        login = request.POST.get('login')
+        data = form.cleaned_data
+        new_form = form.save()
+        user = authenticate(request,login=login, password=password)
+        user = User.objects.create_user(login, first_name=firstname, last_name=surname, password=password)
+        if user is not None:
+            login(request,user)
+            return render(request,'pages/home_for_user.html', locals())
+        else:
+            ms_error(request,('Некоректные данные'))
+    return render(request, 'pages/registration.html', locals())
+'''
 
+
+def login_in(request):
+    form = LoginForm(request.POST or None)
+    if request.method == "POST" :
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+            return render(request, 'pages/home_for_user.html', locals())
+            # return HttpResponseRedirect('/home_for_user/')
+        else:
+            ms_error(request,('Неверные логин или пароль'))
+        if not request.user.is_authenticated:
+            context = {'message': "Такого пользователя нет"}
+    return render(request, 'pages/login.html', locals())
+
+
+def login_out(request):
+    logout(request)
+    return redirect('pages/home.html')
+
+
+def home_for_user(request):
+    return render(request, 'pages/home_for_user.html', locals())
+
+
+def home(request):
     return render(request, 'pages/home.html', locals())
 
 
@@ -71,24 +122,33 @@ def reserv_yacht(request):
     form = ReservationYacht(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
-        data = form.cleaned_data
-        new_form = form.save()
+        if request.user.is_authenticated():
+            user = Users.objects.get(Login=request.user.username)
+            date = datetime.now()
+            data = form.cleaned_data
+            new_form = form.save()
 
     return render(request, 'pages/reservation.html', locals())
 
 
-def yachts(request):
-    yachts = Yacht.objects.filter()
-    return render(request, 'pages/yachts.html', locals())
+def bron_owner(request):
+    session_key = request.session.session_key
+    bron_yachts = DataYacht.objects.filter(session_key=session_key)
+
+    return render(request, 'pages/bron_owner.html', locals())
 
 
 def yacht(request, yacht_id):
+    dateq=date(datetime.now().year, datetime.now().month, datetime.now().day)
+
     yacht_one = 1
     yacht_two = 2
     yacht_four = 4
     yacht = Yacht.objects.get(id=yacht_id)
     days = Lease.objects.filter()
+    user = Users.objects.filter()
     session_key = request.session.session_key
+
     if not session_key:
         request.session.cycle_key()
 
@@ -97,13 +157,9 @@ def yacht(request, yacht_id):
     return render(request, 'pages/yacht.html', locals())
 
 
-def login(request):
-    form = LoginForm(request.POST or None)
-
-    if request.method == "POST" and form.is_valid():
-        data = form.cleaned_data
-        new_form = form.save()
-    return render(request, 'pages/login.html', locals())
+def yachts(request):
+    yachts = Yacht.objects.filter()
+    return render(request, 'pages/yachts.html', locals())
 
 
 def registration_yacht(request):

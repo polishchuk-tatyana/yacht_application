@@ -7,6 +7,23 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.db.models.signals import post_save
+from django.contrib.auth.models import AbstractUser
+
+
+'''class User(AbstractUser):
+    administrator = 1
+    manager = 2
+    owner = 3
+    worker = 4
+    user = 5
+    ROLE_CHOICES=(
+        (administrator,'administrator'),
+        (manager, 'manager'),
+        (owner, 'owner'),
+        (worker, 'worker'),
+        (user, 'user'),
+    )
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES,blank = True, null = True)'''
 
 
 class Club(models.Model):
@@ -48,18 +65,6 @@ class Lease(models.Model):
         managed = False
         db_table = 'lease'
 
-    '''def save(self, *args, **kwargs):
-        finish = self.rent_finish
-        start = self.rent_start
-        new_paid = self.yacht.paid
-        self.new_paid = new_paid
-        self.finish = finish
-        self.start = start
-        self.new_paid = self.new_paid * (self.finish - self.start)
-
-
-
-        super(Lease, self).save(*args, **kwargs)'''
 
 
 class Manufacturer(models.Model):
@@ -76,6 +81,7 @@ class Manufacturer(models.Model):
     def __str__(self):
         return "%s %s" % (self.name, self.country)
 
+
 class Owner(models.Model):
     surname = models.CharField(max_length=50)
     firstname = models.CharField(max_length=50)
@@ -86,6 +92,9 @@ class Owner(models.Model):
     class Meta:
         managed = False
         db_table = 'owner'
+
+    def __str__(self):
+        return "%s %s" % (self.surname, self.firstname)
 
 
 class Service(models.Model):
@@ -118,8 +127,7 @@ class Users(models.Model):
     firstname = models.CharField(max_length=50)
     age = models.IntegerField()
     telno = models.CharField(max_length=15)
-    email = models.CharField(max_length=50, blank=True, null=True)
-    login = models.CharField(max_length=100)
+    login = models.CharField(max_length=50)
     password = models.CharField(max_length=8)
 
     def __str__(self):

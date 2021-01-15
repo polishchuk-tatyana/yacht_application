@@ -1,6 +1,5 @@
 $(document).ready(function(){
    var bron = $('#bron');
-   console.log(bron);
    bron.on('submit', function (e){
       e.preventDefault();
       var submit_b = $('#submit_b');
@@ -9,6 +8,8 @@ $(document).ready(function(){
       var yacht_paid = submit_b.data("yacht_paid");
       var yacht_max_human = submit_b.data("yacht_max_human");
       var yacht_type = submit_b.data("yacht_type");
+      console.log(yacht_id, yacht_model,yacht_paid,yacht_max_human,yacht_type);
+
 
       var data = {};
       data.yacht_id = yacht_id;
@@ -16,7 +17,6 @@ $(document).ready(function(){
       data.yacht_paid = yacht_paid;
       data.yacht_max_human = yacht_max_human;
       data.yacht_type = yacht_type;
-
       console.log(data);
 
       var csrf_token = $('#bron [name = "csrfmiddlewaretoken"]').val();
@@ -28,14 +28,7 @@ $(document).ready(function(){
          type:'POST',
          data: data,
          cache: true,
-         success: function (data){
-            console.log("OK");
-              console.log(data.nmb);
-              console.log(data.yachts);
-               // $.each(data.yachts, function (n, o){
-
-               // })
-         },
+         success: function (data){},
          error: function (){
             console.log("error");
          }
