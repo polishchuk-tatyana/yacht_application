@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div><div><p><label for="id_surname">Surname:</label> <input type="text" name="surname" maxlength="50" required id="id_surname"></p>
+<p><label for="id_firstname">Firstname:</label> <input type="text" name="firstname" maxlength="50" required id="id_firstname"></p>
+<p><label for="id_position">Position:</label> <textarea name="position" cols="40" rows="10" required id="id_position">
+</textarea></p>
+<p><label for="id_salary">Salary:</label> <textarea name="salary" cols="40" rows="10" required id="id_salary">
+</textarea></p>
+<p><label for="id_telno">Telno:</label> <input type="text" name="telno" maxlength="15" required id="id_telno"></p>
+<p><label for="id_email">Email:</label> <input type="text" name="email" maxlength="50" id="id_email"></p>
+<p><label for="id_club">Club:</label> <select name="club" required id="id_club">
+  <option value="" selected>---------</option>
+{% for i in club %}
+ <option value="{{ i.id }}">{{ i.name }}</option>
+{% endfor %}
+</select></p>
+<p><label for="id_manager">Manager:</label> <select name="manager" id="id_manager">
+  <option value="" selected>---------</option>
+
+  <option value="1">Хачикян Давид</option>
+
+  <option value="3">Кудрявцев Иван</option>
+
+  <option value="4">Бумбу Илья</option>
+
+  <option value="2">Войтова Анна</option>
+
+</select></p></div></div>
+
+</body>
+</html>

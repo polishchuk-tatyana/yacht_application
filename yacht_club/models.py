@@ -127,8 +127,6 @@ class Users(models.Model):
     firstname = models.CharField(max_length=50)
     age = models.IntegerField()
     telno = models.CharField(max_length=15)
-    login = models.CharField(max_length=50)
-    password = models.CharField(max_length=8)
 
     def __str__(self):
         return "%s %s" % (self.surname, self.firstname)
@@ -136,7 +134,6 @@ class Users(models.Model):
     class Meta:
         managed = False
         db_table = 'users'
-        unique_together = (('login', 'password'),)
 
 
 class Worker(models.Model):
@@ -148,6 +145,9 @@ class Worker(models.Model):
     email = models.CharField(max_length=50, blank=True, null=True)
     club = models.ForeignKey(Club, models.DO_NOTHING, db_column='club')
     manager = models.ForeignKey('self', models.DO_NOTHING, db_column='manager', blank=True, null=True)
+
+    def __str__(self):
+        return "%s %s" % (self.surname, self.firstname)
 
     class Meta:
         managed = False

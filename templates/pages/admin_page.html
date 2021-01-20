@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+
+    <meta charset="UTF-8">
+    <title>Аренда яхт</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap-->
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Custom styles -->
+    <style>
+        html, body{
+            height: 100%;
+            max-height: 100%;
+        }
+
+        .cd{
+            color: white;
+            text-shadow: #fff -1px -1px 0,
+                 #333 1px 1px 0;
+            margin-right: 0.1%;
+
+        }
+        .general-container{
+            background: url(../static/yachts_images/8994.jpg);
+            height: 100%;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .text{
+            color: azure;
+            font-family: 'Roboto', sans-serif;
+            text-shadow: #fff -1px -1px 0,
+                 #333 1px 1px 0;
+        }
+        .pink{
+            color: deeppink;
+            display: inline;
+        }
+ ul.hr {
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 4px; /* Значение полей */
+     margin-top: 5%;
+     color: black;
+
+   }
+   ul.hr li {
+    display: inline; /* Отображать как строчный элемент */
+    padding: 3px; /* Поля вокруг текста */
+
+   }
+   .c{
+       top: 0%;
+       margin-left: 525px;
+   }
+
+    </style>
+</head>
+<body>
+<!-- Static navbar -->
+ <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+              <ul class = "hr">
+                <li>
+                    <font size="3"><b>Submarine</b></font>
+                </li>
+            <li class="pink">
+                 <font size="3"><b>&</b></font>
+            </li>
+            <li>
+                 <font size="3"><b>Sea.</b></font>
+            </li>
+            </ul>
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/admin_page">Админ страница</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/login">Выход</a></li>
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="general-container">
+        <div class="container top-container">
+            <div class="form-row">
+            <div class="form-group col-md-5">
+                    <input onClick='location.href = "index_user"' class="btn btn-primary btn-orange posit" type="submit" value="Добавить пользователя"></br></br>
+                    <input onClick='location.href = "index_worker"' class="btn btn-primary btn-orange posit" type="submit" value="Добавить работника"></br></br>
+                    <input onClick='location.href = "index_owner"' class="btn btn-primary btn-orange posit" type="submit" value="Добавить владельца"></br></br>
+                    <input onClick='location.href = "index_club"' class="btn btn-primary btn-orange posit" type="submit" value="Добавить клуб"></br></br>
+                    <input onClick='location.href = "index_yacht"' class="btn btn-primary btn-orange posit" type="submit" value="Добавить яхту"></br></br>
+                    <input onClick='location.href = "index_yachtworkers"' class="btn btn-primary btn-orange posit" type="submit" value="Прикрепить работника за яхтой"></br></br>
+                    <input onClick='location.href = "index_reserv"' class="btn btn-primary btn-orange posit" type="submit" value="Бронирования"></br></br>
+                    <input onClick='location.href = "index_manufacturer"' class="btn btn-primary btn-orange posit" type="submit" value="Добавить производителя"></br></br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</body>
+</html>

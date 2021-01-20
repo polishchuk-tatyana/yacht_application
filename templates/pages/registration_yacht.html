@@ -124,20 +124,24 @@
     </div>
     <div class="form-group col-md-5">
       <label for="inputPassword4">EMAIL</label>
-      <input type="text" class="form-control" id="inputPassword4" name = "{{ form.email.name }}">
+      <input type="text" class="form-control" id="inputPassword4" name = "{{ owner_form.username.name }}">
     </div>
   </div>
 
             <div class="form-row">
     <div class="form-group col-md-5">
       <label for="inputPassword4">ПАРОЛЬ</label>
-      <input type="password" class="form-control" id="inputPassword4" name = "{{ form.password.name }}">
+      <input type="password" class="form-control" id="inputPassword4" name = "{{ owner_form.password.name }}">
+    </div>
+                <div class="form-group col-md-5">
+      <label for="inputPassword4">ПОВТОРИТЕ ПАРОЛЬ</label>
+      <input type="password" class="form-control" id="inputPassword4" name = "{{ owner_form.password2.name }}">
     </div>
             </div></br></br></br></br></br></br></br></br></br></br></br></br>
 
             <div>
     <h3>
-        <p class="font-weight-light">Ваша яхта</p>
+        </br><p class="posit">Ваша яхта</p>
     </h3>
 </div>
 {% for i in yacht_formset %}

@@ -110,10 +110,7 @@
 
 <div class="left">
     <p><label for="id_yacht">Яхта:</label> <select name="yacht" required id="id_yacht">
-  <option value="">Ваши яхты</option>
-
   <option value="{{ bron.id }}">{{ bron.model }}</option>
-
 
 </select></p>
 
@@ -146,7 +143,7 @@
                         data-yacht_paid = "{{ bron.paid }}"
                         data-yacht_max_human = "{{ bron.max_human }}"
                         data-yacht_type = "{{ bron.type }}"
-                >Отправить запрос владельцу</button>
+                >Забронировать</button>
             </form>
     {% endfor %}
 </form>

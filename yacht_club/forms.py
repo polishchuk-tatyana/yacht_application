@@ -56,3 +56,10 @@ class ReservationYacht(forms.ModelForm):
     class Meta:
         model = Lease
         exclude = [""]
+
+
+class FormWorker(forms.ModelForm):
+
+    class Meta:
+        model = Worker
+        exclude = [""]
