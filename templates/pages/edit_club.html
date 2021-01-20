@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Изменение клуба</title>
+</head>
+<body class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Введите название клуба</label><br>
+            <input type="text" name="name" value="{{person.name}}" />
+        </p>
+        <p>
+            <label>Введите страну</label><br>
+            <input type="text" name="country" value="{{person.country}}" />
+        </p>
+         <p>
+            <label>Введите адрес</label><br>
+            <input type="text" name="address" value="{{person.address}}" />
+        </p>
+        <p>
+            <label>Введите номер</label><br>
+            <input type="text" name="telno" value="{{person.telno}}" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+</body>
+</html>

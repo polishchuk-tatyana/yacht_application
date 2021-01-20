@@ -86,8 +86,6 @@ class Owner(models.Model):
     surname = models.CharField(max_length=50)
     firstname = models.CharField(max_length=50)
     telno = models.CharField(max_length=15)
-    email = models.CharField(max_length=50, blank=True, null=True)
-    password = models.CharField(max_length=8)
 
     class Meta:
         managed = False

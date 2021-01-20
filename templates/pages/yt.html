@@ -22,14 +22,9 @@
 </select></p>
 <p><label for="id_manager">Manager:</label> <select name="manager" id="id_manager">
   <option value="" selected>---------</option>
-
-  <option value="1">Хачикян Давид</option>
-
-  <option value="3">Кудрявцев Иван</option>
-
-  <option value="4">Бумбу Илья</option>
-
-  <option value="2">Войтова Анна</option>
+{% for i in club %}
+ <option value="{{ i.id }}">{{ i.manager }}</option>
+{% endfor %}
 
 </select></p></div></div>
 

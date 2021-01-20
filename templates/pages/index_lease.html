@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Изменение бронирований</title>
+</head>
+<body class="container">
+    {% if people.count > 0 %}
+    <h2>Список бронирований</h2>
+    <table>
+        <thead><th>Id</th><th>Яхта</th><th>Клиент</th><th>Способ оплаты</th><th>Начало аренды</th><th>Конец аренды</th><th>Капитан</th><th>Сертификат</th><th></th></thead>
+        {% for person in people %}
+        <tr>
+            <td>{{ person.id }}</td>
+            <td>{{ person.yacht }}</td>
+            <td>{{ person.users }}</td>
+            <td>{{ person.pay_method }}</td>
+            <td>{{ person.rent_start }}</td>
+            <td>{{ person.rent_finish }}</td>
+            <td>{{ person.capitan }}</td>
+            <td>{{ person.certification }}</td>
+            <td><a href="edit_lease/{{person.id}}">Изменить</a> | <a href="delete_lease/{{person.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

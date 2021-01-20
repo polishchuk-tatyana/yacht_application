@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Изменение яхты</title>
+</head>
+<body class="container">
+    {% if people.count > 0 %}
+    <h2>Список яхт</h2>
+    <table>
+        <thead><th>Id</th><th>Тип</th><th>Модель</th><th>Каюта</th><th>Вместимость</th><th>Год</th><th>Длина</th><th>Мотор</th><th>Клуб</th><th>Производитель</th><th>Владелец</th><th></th></thead>
+        {% for person in people %}
+        <tr>
+            <td>{{ person.type }}</td>
+            <td>{{ person.model }}</td>
+            <td>{{ person.cabin }}</td>
+            <td>{{ person.max_human }}</td>
+            <td>{{ person.year }}</td>
+            <td>{{ person.length }}</td>
+            <td>{{ person.motor }}</td>
+            <td>{{ person.club }}</td>
+            <td>{{ person.manufacturer }}</td>
+            <td>{{ person.paid }}</td>
+            <td>{{ person.owner }}</td>
+            <td><a href="edit_yacht/{{person.id}}">Изменить</a> | <a href="delete_yacht/{{person.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

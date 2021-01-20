@@ -7,7 +7,7 @@
 <body class="container">
     <form method="POST">
         {% csrf_token %}
-        <p>
+         <p>
             <label>Введите фамилию</label><br>
             <input type="text" name="surname" value="{{person.surname}}" />
         </p>
@@ -16,17 +16,31 @@
             <input type="text" name="firstname" value="{{person.firstname}}" />
         </p>
          <p>
-            <label>Введите возраст</label><br>
-            <input type="number" name="age" value="{{person.age}}" />
+            <label>Введите должность</label><br>
+            <input type="text" name="position" value="{{person.position}}" />
         </p>
          <p>
+            <label>Введите зарплату</label><br>
+            <input type="text" name="salary" value="{{person.salary}}" />
+        </p>
+        <p>
             <label>Введите номер телефона</label><br>
             <input type="text" name="telno" value="{{person.telno}}" />
         </p>
-        <div class="form-group"><label class="control-label col-sm-6" for="id_username">Логин</label><div class="col-sm-9"> <input class="form-control" type="text" name="username" maxlength="150" required id="id_username"></div> <span class="helptext"></span></div>
-                <div class="form-group"><label class="control-label col-sm-6" for="id_password">Пароль</label><div class="col-sm-9"> <input class="form-control" type="password" name="password" required id="id_password"></div></div>
-                <div class="form-group"><label class="control-label col-sm-6" for="id_password2">Повторите пароль</label> <div class="col-sm-9"><input class="form-control" type="password" name="password2" required id="id_password2"></div></div>
+        <p>
+            <label>Введите email</label><br>
+            <input type="email" name="email" value="{{person.email}}" />
+        </p>
+        <p>
+            <label>Введите клуб</label><br>
+            <input type="text" name="club" value="{{person.club}}" />
+        </p>
+        <p>
+            <label>Введите менеджера</label><br>
+            <input type="text" name="manager" value="{{person.manager}}" />
+        </p>
         <input type="submit" value="Сохранить" >
+
     </form>
 </body>
 </html>

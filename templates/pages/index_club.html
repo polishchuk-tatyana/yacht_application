@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Изменение пользователя</title>
+</head>
+<body class="container">
+    {% if people.count > 0 %}
+    <h2>Список клуб</h2>
+    <table>
+        <thead><th>Id</th><th>Название</th><th>Страна</th><th>Адрес</th><th>Телефон</th><th></th></thead>
+        {% for person in people %}
+        <tr>
+            <td>{{ person.id }}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.country }}</td>
+            <td>{{ person.address }}</td>
+            <td>{{ person.telno }}</td>
+            <td><a href="edit_club/{{person.id}}">Изменить</a> | <a href="delete_club/{{person.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

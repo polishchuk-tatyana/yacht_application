@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Изменение бронирований</title>
+</head>
+<body class="container">
+    <form method="POST">
+        {% csrf_token %}
+         <p>
+            <label>Введите яхту</label><br>
+            <input type="text" name="yacht" value="{{person.yacht}}" />
+        </p>
+        <p>
+            <label>Введите пользователя</label><br>
+            <input type="text" name="users" value="{{person.users}}" />
+        </p>
+         <p>
+            <label>Введите способ оплаты</label><br>
+            <input type="text" name="pay_method" value="{{person.pay_method}}" />
+        </p>
+         <p>
+            <label>Введите начало аренды</label><br>
+            <input type="date" name="rent_start" value="{{person.rent_start}}" />
+        </p>
+        <p>
+            <label>Введите конец аренды</label><br>
+            <input type="date" name="rent_finish" value="{{person.rent_finish}}" />
+        </p>
+        <p>
+            <label>Введите наличие капитана</label><br>
+            <input type="checkbox" name="capitan" value="{{person.capitan}}" />
+        </p>
+        <p>
+            <label>Введите наличие сертификата</label><br>
+            <input type="checkbox" name="certification" value="{{person.certification}}" />
+        </p>
+        <input type="submit" value="Сохранить" >
+
+    </form>
+</body>
+</html>

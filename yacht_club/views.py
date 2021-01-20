@@ -9,7 +9,7 @@ from django.db import connection
 from .forms import *
 from .models import *
 from datetime import datetime, date
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseNotFound
@@ -20,31 +20,6 @@ from django.http import HttpResponseNotFound
 def index_user(request):
     people = Users.objects.all()
     return render(request, "pages/index_user.html", {"people": people})
-
-
-# сохранение данных в бд
-def create_user(request):
-    if request.method == "POST":
-        person = Users()
-        person.surname = request.POST.get("surname")
-        person.firstname = request.POST.get("firstname")
-        person.age = request.POST.get("age")
-        person.telno = request.POST.get("telno")
-        person.save()
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            # Create a new user object but avoid saving it yet
-            new_user = user_form.save(commit=False)
-            # Set the chosen password
-            new_user.set_password(user_form.cleaned_data['password'])
-            # Save the User object
-            new_user.save()
-            return render(request, 'pages/index_user.html', locals())
-    else:
-        user_form = UserRegistrationForm()
-    return render(request, 'pages/index_user.html', locals())
-
 
 # изменение данных в бд
 def edit_user(request, id):
@@ -73,48 +48,12 @@ def delete_user(request, id):
     except Users.DoesNotExist:
         return HttpResponseNotFound("<h2>Person not found</h2>")
 
-
-
-
-
 '''Изменение работника'''
 
 # получение данных из бд
 def index_worker(request):
     people = Worker.objects.all()
     return render(request, "pages/index_worker.html", {"people": people})
-
-
-
-# сохранение данных в бд
-def create_worker(request):
-    club = Club.objects.filter()
-    manufacturer = Manufacturer.objects.filter()
-    if request.method == "POST":
-        person = Worker()
-        person.surname = request.POST.get("surname")
-        person.firstname = request.POST.get("firstname")
-        person.position = request.POST.get("position")
-        person.salary = request.POST.get("salary")
-        person.telno = request.POST.get("telno")
-        person.email = request.POST.get("email")
-        person.club = request.POST.get("club")
-        person.save()
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            # Create a new user object but avoid saving it yet
-            new_user = user_form.save(commit=False)
-            # Set the chosen password
-            new_user.set_password(user_form.cleaned_data['password'])
-            # Save the User object
-            new_user.save()
-            return render(request, 'pages/index_worker.html', locals())
-    else:
-        user_form = UserRegistrationForm()
-
-    return render(request, 'pages/index_worker.html', locals())
-
 
 # изменение данных в бд
 def edit_worker(request, id):
@@ -146,6 +85,197 @@ def delete_worker(request, id):
         return render(request, 'pages/index_worker.html', locals())
     except Worker.DoesNotExist:
         return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+
+
+'''Изменение владельца'''
+
+# получение данных из бд
+def index_owner(request):
+    people = Owner.objects.all()
+    return render(request, "pages/index_owner.html", {"people": people})
+
+# изменение данных в бд
+def edit_owner(request, id):
+    try:
+        person = Owner.objects.get(id=id)
+
+        if request.method == "POST":
+            person.surname = request.POST.get("surname")
+            person.firstname = request.POST.get("firstname")
+            person.telno = request.POST.get("telno")
+            person.save()
+            return render(request, 'pages/index_owner.html', locals())
+        else:
+            return render(request, "pages/edit_owner.html", {"person": person})
+    except Owner.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+# удаление данных из бд
+def delete_owner(request, id):
+    try:
+        person = Owner.objects.get(id=id)
+        person.delete()
+        return render(request, 'pages/index_owner.html', locals())
+    except Owner.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+'''Изменение клуба'''
+
+# получение данных из бд
+def index_club(request):
+    people = Club.objects.all()
+    return render(request, "pages/index_club.html", {"people": people})
+
+# изменение данных в бд
+def edit_club(request, id):
+    try:
+        person = Club.objects.get(id=id)
+
+        if request.method == "POST":
+            person.name = request.POST.get("name")
+            person.country = request.POST.get("country")
+            person.address = request.POST.get("address")
+            person.telno = request.POST.get("telno")
+            person.save()
+            return render(request, 'pages/index_club.html', locals())
+        else:
+            return render(request, "pages/edit_club.html", {"person": person})
+    except Club.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+# удаление данных из бд
+def delete_club(request, id):
+    try:
+        person = Club.objects.get(id=id)
+        person.delete()
+        return render(request, 'pages/index_club.html', locals())
+    except Club.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+'''Изменение яхты'''
+
+# получение данных из бд
+def index_yacht(request):
+    people = Yacht.objects.all()
+    return render(request, "pages/index_yacht.html", {"people": people})
+
+# изменение данных в бд
+def edit_yacht(request, id):
+    try:
+        person = Yacht.objects.get(id=id)
+
+        if request.method == "POST":
+            person.type = request.POST.get("type")
+            person.model = request.POST.get("model")
+            person.cabin = request.POST.get("cabin")
+            person.max_human = request.POST.get("max_human")
+            person.year = request.POST.get("year")
+            person.length = request.POST.get("length")
+            person.motor = request.POST.get("motor")
+            person.club = request.POST.get("club")
+            person.manufacturer = request.POST.get("manufacturer")
+            person.paid = request.POST.get("paid")
+            person.owner = request.POST.get("owner")
+            person.save()
+            return render(request, 'pages/index_yacht.html', locals())
+        else:
+            return render(request, "pages/edit_yacht.html", {"person": person})
+    except Yacht.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+# удаление данных из бд
+def delete_yacht(request, id):
+    try:
+        person = Yacht.objects.get(id=id)
+        person.delete()
+        return render(request, 'pages/index_yacht.html', locals())
+    except Yacht.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+
+'''Изменение бронирований'''
+
+# получение данных из бд
+def index_lease(request):
+    people = Lease.objects.all()
+    return render(request, "pages/index_lease.html", {"people": people})
+
+# изменение данных в бд
+def edit_lease(request, id):
+    try:
+        person = Lease.objects.get(id=id)
+
+        if request.method == "POST":
+            person.yacht = request.POST.get("yacht")
+            person.users = request.POST.get("users")
+            person.pay_method = request.POST.get("pay_method")
+            person.rent_start = request.POST.get("rent_start")
+            person.rent_finish = request.POST.get("rent_finish")
+            person.capitan = request.POST.get("capitan")
+            person.certification = request.POST.get("certification")
+
+            person.save()
+            return render(request, 'pages/index_lease.html', locals())
+        else:
+            return render(request, "pages/edit_lease.html", {"person": person})
+    except Lease.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+# удаление данных из бд
+def delete_lease(request, id):
+    try:
+        person = Lease.objects.get(id=id)
+        person.delete()
+        return render(request, 'pages/index_lease.html', locals())
+    except Lease.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+'''Изменение производителя'''
+
+# получение данных из бд
+def index_manufacturer(request):
+    people = Manufacturer.objects.all()
+    return render(request, "pages/index_manufacturer.html", {"people": people})
+
+# изменение данных в бд
+def edit_manufacturer(request, id):
+    try:
+        person = Manufacturer.objects.get(id=id)
+
+        if request.method == "POST":
+            person.name = request.POST.get("name")
+            person.country = request.POST.get("country")
+            person.address = request.POST.get("address")
+            person.telno = request.POST.get("telno")
+            person.email = request.POST.get("email")
+            person.save()
+            return render(request, 'pages/index_manufacturer.html', locals())
+        else:
+            return render(request, "pages/edit_manufacturer.html", {"person": person})
+    except Manufacturer.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
+# удаление данных из бд
+def delete_manufacturer(request, id):
+    try:
+        person = Manufacturer.objects.get(id=id)
+        person.delete()
+        return render(request, 'pages/index_manufacturer.html', locals())
+    except Manufacturer.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+
+
 """----------------------------------------------------------------"""
 
 def admin(request):
@@ -317,3 +447,90 @@ def registration_yacht(request):
     else:
         owner_form = UserRegistrationForm()
     return render(request, 'pages/registration_yacht.html', locals())
+
+def addUser(request):
+    form_user = RegistrationForm(request.POST or None)
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            new_user.groups.add(Group.objects.get(name='User'))
+            return render(request, 'pages/admin_page.html', locals())
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'pages/add_user.html', locals())
+
+
+def addWorker(request):
+    form_user = FormWorker(request.POST or None)
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            new_user.groups.add(Group.objects.get(name='Worker'))
+            return render(request, 'pages/admin_page.html', locals())
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'pages/add_worker.html', locals())
+
+
+def addOwner(request):
+    form_user = RegistrationYacht(request.POST or None)
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            new_user.groups.add(Group.objects.get(name='Owner'))
+            return render(request, 'pages/admin_page.html', locals())
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'pages/add_owner.html', locals())
+
+
+def addManager(request):
+    form_user = FormWorker(request.POST or None)
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            new_user.groups.add(Group.objects.get(name='Manager'))
+            return render(request, 'pages/admin_page.html', locals())
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'pages/add_owner.html', locals())

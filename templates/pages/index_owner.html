@@ -6,17 +6,16 @@
 </head>
 <body class="container">
     {% if people.count > 0 %}
-    <h2>Список пользователей</h2>
+    <h2>Список владельцев</h2>
     <table>
-        <thead><th>Id</th><th>Фамилия</th><th>Имя</th><th>Возраст</th><th>Телефон</th><th></th></thead>
+        <thead><th>Id</th><th>Фамилия</th><th>Имя</th><th>Телефон</th><th></th></thead>
         {% for person in people %}
         <tr>
             <td>{{ person.id }}</td>
             <td>{{ person.surname }}</td>
             <td>{{ person.firstname }}</td>
-            <td>{{ person.age }}</td>
             <td>{{ person.telno }}</td>
-            <td><a href="edit_user/{{person.id}}">Изменить</a> | <a href="delete_user/{{person.id}}">Удалить</a></td>
+            <td><a href="edit_owner/{{person.id}}">Изменить</a> | <a href="delete_owner/{{person.id}}">Удалить</a></td>
         </tr>
         {% endfor %}
     </table>

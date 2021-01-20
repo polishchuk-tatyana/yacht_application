@@ -20,13 +20,34 @@ urlpatterns = [
     path('admin_page/', views.admin, name='admin'),
     # изменение пользователя
     path('admin_page/index_user', views.index_user),
-    path('admin_page/create_user/', views.create_user),
     path('admin_page/edit_user/<int:id>/', views.edit_user),
     path('admin_page/delete_user/<int:id>/', views.delete_user),
     # изменение работника
     path('admin_page/index_worker', views.index_worker),
-    path('admin_page/create_worker/', views.create_worker),
     path('admin_page/edit_worker/<int:id>/', views.edit_worker),
     path('admin_page/delete_worker/<int:id>/', views.delete_worker),
-path('yt/', views.yt,),
+# изменение owner
+    path('admin_page/index_owner', views.index_owner),
+    path('admin_page/edit_owner/<int:id>/', views.edit_owner),
+    path('admin_page/delete_owner/<int:id>/', views.delete_owner),
+# изменение club
+    path('admin_page/index_club', views.index_club),
+    path('admin_page/edit_club/<int:id>/', views.edit_club),
+    path('admin_page/delete_club/<int:id>/', views.delete_club),
+# изменение yacht
+    path('admin_page/index_yacht', views.index_yacht),
+    path('admin_page/edit_yacht/<int:id>/', views.edit_yacht),
+    path('admin_page/delete_yacht/<int:id>/', views.delete_yacht),
+# изменение lease
+    path('admin_page/index_lease', views.index_lease),
+    path('admin_page/edit_lease/<int:id>/', views.edit_lease),
+    path('admin_page/delete_lease/<int:id>/', views.delete_lease),
+# изменение manufacturer
+    path('admin_page/index_manufacturer', views.index_manufacturer),
+    path('admin_page/edit_manufacturer/<int:id>/', views.edit_manufacturer),
+    path('admin_page/delete_manufacturer/<int:id>/', views.delete_manufacturer),
+path('admin_page/add_user/', views.addUser),
+path('admin_page/add_worker/', views.addWorker),
+path('admin_page/add_owner/', views.addOwner),
+path('admin_page/add_manager/', views.addManager),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
