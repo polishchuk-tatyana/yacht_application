@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'yacht_club',
+    'rest_framework'
     # 'leases',
     # 'workers',
     # 'yachts',

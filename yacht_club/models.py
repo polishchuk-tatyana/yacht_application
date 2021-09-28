@@ -9,7 +9,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractUser
 
-
 '''class User(AbstractUser):
     administrator = 1
     manager = 2
@@ -66,7 +65,6 @@ class Lease(models.Model):
         db_table = 'lease'
 
 
-
 class Manufacturer(models.Model):
     name = models.CharField(max_length=300)
     telno = models.CharField(max_length=15)
@@ -93,31 +91,6 @@ class Owner(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.surname, self.firstname)
-
-
-class Service(models.Model):
-    service = models.CharField(max_length=300)
-    telno = models.CharField(max_length=15)
-    country = models.CharField(max_length=20)
-    address = models.TextField()  # This field type is a guess.
-    email = models.CharField(max_length=50, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'service'
-
-
-class Serviceyacht(models.Model):
-    service = models.OneToOneField(Service, models.DO_NOTHING, db_column='service', primary_key=True)
-    yacht = models.ForeignKey('Yacht', models.DO_NOTHING, db_column='yacht')
-    comment = models.CharField(max_length=300, blank=True, null=True)
-    start_date = models.DateField()
-    finish_date = models.DateField()
-
-    class Meta:
-        managed = False
-        db_table = 'serviceyacht'
-        unique_together = (('service', 'yacht'),)
 
 
 class Users(models.Model):
@@ -164,9 +137,11 @@ class Yacht(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, models.DO_NOTHING, db_column='manufacturer')
     paid = models.TextField()  # This field type is a guess.
     owner = models.ForeignKey(Owner, models.DO_NOTHING, db_column='owner')
+
     class Meta:
         managed = False
         db_table = 'yacht'
+
     def __str__(self):
         return self.model
 
@@ -179,17 +154,3 @@ class Yachtworkers(models.Model):
         managed = False,
         db_table = 'yachtworkers'
         unique_together = (('worker', 'yacht'),)
-
-
-'''def summa_paid(sender, instance, created, **kwargs):
-    paid = instance.paid
-    all_paid = Lease.objects.filter(paid=paid)
-    sum = 0
-    for i in all_paid:
-        sum += i.new_paid
-    instance.paid.new_paid = sum
-    instance.paid.save(force_update=True)
-
-
-post_save.connect(summa_paid, sender=Lease)
-'''

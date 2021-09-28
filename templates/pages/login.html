@@ -66,7 +66,7 @@
             <li class="active"><a href="/">На главную</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="/registration_yacht">Зарегистрировать вашу яхту</a></li>
+              <li><a href="/registration_owner">Зарегистрировать вашу яхту</a></li>
             <li class="active"><a href="/login">Вход<span class="sr-only">(current)</span></a></li>
             <li><a href="/registration_users">Регистрация</a></li>
           </ul>
@@ -79,20 +79,13 @@
         <div class="row">
             <div class="col-lg-2 col-lg-offset">
                 <p><h1 class="black">Войти</h1></p>
-            <form method="post" class="form-inline text-center">{% csrf_token %}
-                <input type="hidden" name="next" value="{{ next }}">
-                <div class="form-group">
-                    <label class="control-label col-sm-5">Логин</label></br>
-                    <input type="text" name = "{{ form.username.name }}" class="form-control">
 
-                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-5">Пароль</label></br>
-                    <input type="text" name = "{{ form.password.name }}" class="form-control">
-                    <button type="submit" class="btn btn-primary btn-orange">Войти</button>
-                </div></br></br>
+  <form action="." method="post"> {% csrf_token %}
+      <p><label for="id_username">Логин:</label> <input type="text" name="username" required id="id_username"></p>
+<p><label for="id_password">Пароль:</label> <input type="password" name="password" required id="id_password"></p>
+        <p><input type="submit" value="Войти"></p>
+    </form>
 
-                </form>
             </div>
             </div></br>
         </div></br>

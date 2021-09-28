@@ -96,7 +96,7 @@
             <li><a href="/yachts">Аренда яхт</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="/reservation">Бронирования<span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="/reservation">Забронировать<span class="sr-only">(current)</span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -112,6 +112,12 @@
                     {% endif %}
                 {%  if yacht.id == yacht_four%}
                      <img src = "../../static/media/yacht_images/2.jpg" class="img-responsive">
+                    {% endif %}
+                 {%  if yacht.id == yacht_seven%}
+                     <img src = "../../static/media/yacht_images/7.jpg" class="img-responsive">
+                    {% endif %}
+                {%  if yacht.id == yacht_eight%}
+                     <img src = "../../static/media/yacht_images/8.jpg" class="img-responsive">
                     {% endif %}
                 </div>
                 <div class="col-lg-6">

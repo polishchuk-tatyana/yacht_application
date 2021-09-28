@@ -1,11 +1,12 @@
-from django.http import HttpResponseRedirect,JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib import messages
+from django.contrib.messages import error as ms_error
 import datetime
 from django.db import connection
+from django.contrib import auth
 from .forms import *
 from .models import *
 from datetime import datetime, date
@@ -16,10 +17,12 @@ from django.http import HttpResponseNotFound
 
 '''Изменение пользователя'''
 
+
 # получение данных из бд
 def index_user(request):
     people = Users.objects.all()
     return render(request, "pages/index_user.html", {"people": people})
+
 
 # изменение данных в бд
 def edit_user(request, id):
@@ -48,12 +51,15 @@ def delete_user(request, id):
     except Users.DoesNotExist:
         return HttpResponseNotFound("<h2>Person not found</h2>")
 
+
 '''Изменение работника'''
+
 
 # получение данных из бд
 def index_worker(request):
     people = Worker.objects.all()
     return render(request, "pages/index_worker.html", {"people": people})
+
 
 # изменение данных в бд
 def edit_worker(request, id):
@@ -87,14 +93,14 @@ def delete_worker(request, id):
         return HttpResponseNotFound("<h2>Person not found</h2>")
 
 
-
-
 '''Изменение владельца'''
+
 
 # получение данных из бд
 def index_owner(request):
     people = Owner.objects.all()
     return render(request, "pages/index_owner.html", {"people": people})
+
 
 # изменение данных в бд
 def edit_owner(request, id):
@@ -125,10 +131,12 @@ def delete_owner(request, id):
 
 '''Изменение клуба'''
 
+
 # получение данных из бд
 def index_club(request):
     people = Club.objects.all()
     return render(request, "pages/index_club.html", {"people": people})
+
 
 # изменение данных в бд
 def edit_club(request, id):
@@ -160,10 +168,12 @@ def delete_club(request, id):
 
 '''Изменение яхты'''
 
+
 # получение данных из бд
 def index_yacht(request):
     people = Yacht.objects.all()
     return render(request, "pages/index_yacht.html", {"people": people})
+
 
 # изменение данных в бд
 def edit_yacht(request, id):
@@ -200,13 +210,14 @@ def delete_yacht(request, id):
         return HttpResponseNotFound("<h2>Person not found</h2>")
 
 
-
 '''Изменение бронирований'''
+
 
 # получение данных из бд
 def index_lease(request):
     people = Lease.objects.all()
     return render(request, "pages/index_lease.html", {"people": people})
+
 
 # изменение данных в бд
 def edit_lease(request, id):
@@ -242,10 +253,12 @@ def delete_lease(request, id):
 
 '''Изменение производителя'''
 
+
 # получение данных из бд
 def index_manufacturer(request):
     people = Manufacturer.objects.all()
     return render(request, "pages/index_manufacturer.html", {"people": people})
+
 
 # изменение данных в бд
 def edit_manufacturer(request, id):
@@ -278,20 +291,22 @@ def delete_manufacturer(request, id):
 
 """----------------------------------------------------------------"""
 
+
 def admin(request):
-    if request.user.groups.filter(name = 'Administrator').exists():
+    if request.user.groups.filter(name='Administrator').exists():
         return render(request, 'pages/admin_page.html', locals())
 
     return render(request, 'pages/admin_page.html', locals())
 
 
 def registration(request):
-    form = RegistrationForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        data = form.cleaned_data
-        new_form = form.save()
+    form_user = RegistrationForm(request.POST or None)
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
+
         if user_form.is_valid():
             # Create a new user object but avoid saving it yet
             new_user = user_form.save(commit=False)
@@ -299,27 +314,57 @@ def registration(request):
             new_user.set_password(user_form.cleaned_data['password'])
             # Save the User object
             new_user.save()
+            new_user.groups.add(Group.objects.get(name='User'))
             return render(request, 'pages/home_for_user.html', locals())
     else:
         user_form = UserRegistrationForm()
     return render(request, 'pages/registration.html', locals())
 
 
+def registration_owner(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            new_user.groups.add(Group.objects.get(name='Owner'))
+            return render(request, 'pages/registration_yacht.html', locals())
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'pages/registration_owner.html', locals())
+
+
 def login_in(request):
-    form = LoginForm(request.POST or None)
-    if request.method == "POST" :
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-            return render(request, 'pages/home_for_user.html', locals())
-        else:
-            messages.add_message(request, messages.INFO, 'Неверные логин или пароль')
-        if not request.user.is_authenticated:
-            context = {'message': "Такого пользователя нет"}
-    return render(request, 'pages/login.html', locals())
+    if request.method == 'POST':
+        form = LoginForm(request.POST or None)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    print("Successful")
+                    if user.groups.filter(name='User').count():
+                        return render(request, 'pages/home_for_user.html', locals())
+                    if user.groups.filter(name='Administrator').count():
+                        return render(request, 'pages/admin_page.html', locals())
+                    if user.groups.filter(name='Manager').count():
+                        return render(request, 'pages/manager.html', locals())
+                    if user.groups.filter(name='Owner').count():
+                        return render(request, 'pages/registration_yacht.html', locals())
+
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    else:
+        form = LoginForm()
+    return render(request, 'pages/login.html', {'form': form})
 
 
 def login_out(request):
@@ -345,7 +390,8 @@ def reservation(request):
     yacht_paid = data.get('yacht_paid')
     yacht_max_human = data.get('yacht_max_human')
     yacht_type = data.get('yacht_type')
-    new_yacht = DataYacht.objects.create(session_key=session_key,id=yacht_id, model=yacht_model, paid=yacht_paid, max_human=yacht_max_human,type=yacht_type)
+    new_yacht = DataYacht.objects.create(session_key=session_key, id=yacht_id, model=yacht_model, paid=yacht_paid,
+                                         max_human=yacht_max_human, type=yacht_type)
 
     yachts = DataYacht.objects.filter(session_key=session_key)
     yachts_nb = yachts.count()
@@ -366,15 +412,14 @@ def reservation(request):
 def reserv_yacht(request):
     session_key = request.session.session_key
     bron_yachts = DataYacht.objects.filter(session_key=session_key)
-
     form = ReservationYacht(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
-        if request.user.is_authenticated():
-            # user = Users.objects.get(Login=request.user.username)
-            date = datetime.now()
-            data = form.cleaned_data
-            new_form = form.save()
+        # if request.user.is_authenticated():
+        # user = Users.objects.get(Login=request.user.username)
+        date = datetime.now()
+        data = form.cleaned_data
+        new_form = form.save()
 
     return render(request, 'pages/reservation.html', locals())
 
@@ -387,11 +432,13 @@ def bron_owner(request):
 
 
 def yacht(request, yacht_id):
-    dateq=date(datetime.now().year, datetime.now().month, datetime.now().day)
+    dateq = date(datetime.now().year, datetime.now().month, datetime.now().day)
 
     yacht_one = 1
     yacht_two = 2
     yacht_four = 4
+    yacht_seven = 7
+    yacht_eight = 8
     yacht = Yacht.objects.get(id=yacht_id)
     days = Lease.objects.filter()
     user = Users.objects.filter()
@@ -409,15 +456,6 @@ def yachts(request):
     yachts = Yacht.objects.filter()
     return render(request, 'pages/yachts.html', locals())
 
-
-
-def yt(request):
-    form_worker = FormWorker(request.POST or None)
-    club = Club.objects.filter()
-    if request.method == 'POST' and form_worker.is_valid():
-        data = form_worker.cleaned_data
-        new_form = form_worker.save()
-    return render(request, 'pages/yt.html', locals())
 
 def registration_yacht(request):
     form = RegistrationYacht()
@@ -447,6 +485,7 @@ def registration_yacht(request):
     else:
         owner_form = UserRegistrationForm()
     return render(request, 'pages/registration_yacht.html', locals())
+
 
 def addUser(request):
     form_user = RegistrationForm(request.POST or None)
@@ -533,4 +572,53 @@ def addManager(request):
             return render(request, 'pages/admin_page.html', locals())
     else:
         user_form = UserRegistrationForm()
-    return render(request, 'pages/add_owner.html', locals())
+    return render(request, 'pages/add_worker.html', locals())
+
+
+def addClub(request):
+    form_user = FormClub(request.POST or None)
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
+    return render(request, 'pages/add_club.html', locals())
+
+
+def addYacht(request):
+    form_user = FormYacht(request.POST or None)
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
+    return render(request, 'pages/add_yacht.html', locals())
+
+
+def addYachtworker(request):
+    form_user = FormYachtworker(request.POST or None)
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
+    return render(request, 'pages/add_yachtworkers.html', locals())
+
+
+def addLease(request):
+    form_user = LeaseForm(request.POST or None)
+    yacht = Yacht.objects.filter()
+    user = Users.objects.filter()
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
+    return render(request, 'pages/add_lease.html', locals())
+
+
+def addManufacturer(request):
+    form_user = FormManufacturer(request.POST or None)
+    if request.method == 'POST' and form_user.is_valid():
+        data = form_user.cleaned_data
+        new_form = form_user.save()
+    return render(request, 'pages/add_manufacturer.html', locals())
+
+
+def manager(request):
+    if request.user.groups.filter(name='Manager').exists():
+        return render(request, 'pages/manager.html', locals())
+
+    return render(request, 'pages/manager.html', locals())
